@@ -1,0 +1,4 @@
+create trigger prediction_triger
+before insert on iris
+for each row
+execute procedure species_predict();

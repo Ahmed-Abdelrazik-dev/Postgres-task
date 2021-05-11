@@ -1,0 +1,9 @@
+create or replace function species_predict()
+returns trigger as
+$BODY$
+begin
+new.species = call_model(new.sepal_length, new.sepal_width, new.petal_length, new.petal_width);
+return new;
+end;
+$BODY$
+language plpgsql;

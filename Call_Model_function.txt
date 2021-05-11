@@ -1,0 +1,17 @@
+CREATE OR REPLACE FUNCTION public.call_model(
+	sepal_length double precision,
+	sepal_width double precision,
+	petal_length double precision,
+	petal_width double precision)
+	
+returns character varying
+AS $$
+    import pickle
+    filepath = '/home/iti/Desktop/Task5/ML_model.sav'
+    knn = pickle.load(open(filepath, 'rb'))
+
+    y_pred = knn.predict([[sepal_length,sepal_width,petal_length,petal_width]])
+    print(y_pred)
+
+    return y_pred
+$$ language 'plpython3u';
